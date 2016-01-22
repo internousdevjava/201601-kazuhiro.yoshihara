@@ -5,8 +5,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-
-;
+import java.util.InputMismatchException;
 
 public class KisoKadai3 {
 
@@ -14,15 +13,15 @@ public class KisoKadai3 {
 	public static void main(String[] args){
 		boolean flag=true;
 
-		String path0="c:\\temp";//スタートするフォルダ
+		String path0="c:\\temp";//スタートするフォルダ 存在しない場合
 		String path=path0;
 
 		while(flag){
 			//メニュー
 			System.out.println
-			("メニュー 1ファイル作成:2:ファイル上書き3:ファイルに追記"
+			("メニュー\n 1ファイル作成:2:ファイル上書き3:ファイルに追記"
 					+ "4:ファイルの読み込み5:ファイルの削除\n"
-					+ "6:ディレクトリの作成10:現在のリスト11:パス確認\n100:終了します");
+					+ "6:ディレクトリの作成10:パス移動11:パス確認\n100:終了します");
 
 			String select=getstr();
 			switch(select){
@@ -149,6 +148,7 @@ public class KisoKadai3 {
 		}
 
 	//ファイル・フォルダのリストを表示して移動
+	@SuppressWarnings("resource")
 	public static String cddir(String s){
 		 File cdirectory = new File(s);
 		 if(cdirectory.isFile()){
@@ -172,7 +172,13 @@ public class KisoKadai3 {
 		      }
 		    }
 		    System.out.println("移動したいファイルまたはフォルダの番号をえらんでください");
-		    int select=new java.util.Scanner(System.in).nextInt();
+		    	int select=0;
+		    	try{
+		    		select=new java.util.Scanner(System.in).nextInt();
+		    	}catch(InputMismatchException e){
+		    		System.out.println(e);
+		    	}
+
 		    if((select>=filelist.length)||(select<0)){
 		    	System.out.println("終了します");
 		    	return s;
@@ -201,10 +207,14 @@ public class KisoKadai3 {
 				flag=false;
 				break;
 			case "b":
-				s=(new File(s).getParentFile()).getAbsolutePath();
+				try {
+					s=(new File(s).getParentFile()).getAbsolutePath();
+				}catch(NullPointerException e){
+					System.out.println("親ディレクトリが存在しません");
+				}
 				break;
 			default :
-				System.out.println("(y/n b)で選択してください");
+				System.out.println("(y/n b)で選択してください");//c:でb の時 ぬるぽ
 			 }
 		}
 		return s;
@@ -229,7 +239,7 @@ public class KisoKadai3 {
 	}
 
 
-	//ファイルの作成 すでに存在するときの動き
+	//ファイルの作成
 	 public static void mkfile(String s){
 
 		 System.out.println("作成するファイルの名前を書いてください(.txt)は要りません");
