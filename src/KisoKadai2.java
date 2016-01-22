@@ -28,7 +28,7 @@ public class KisoKadai2{
             	flag=false;
             	System.out.println(que+"正解です"+cnt+"回かかりました");
             }
-            if(ans>que){
+            if(ans>100){
             	flag=false;
             	System.out.println("終了します");
             }
