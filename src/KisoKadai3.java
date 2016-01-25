@@ -13,7 +13,7 @@ public class KisoKadai3 {
 	public static void main(String[] args){
 		boolean flag=true;
 
-		String path0="c:\\temp";//スタートするフォルダ 存在しない場合
+		String path0="c:\\";//スタートするフォルダ 存在しない場合
 		String path=path0;
 
 		while(flag){
@@ -66,7 +66,9 @@ public class KisoKadai3 {
 				System.out.println("読み込むファイルを選択してください");
 				path=selectf(path);
 				if (new File(path).isFile()){
+				System.out.println("--------------");
 				filer(path);
+				System.out.println("--------------");
 				}else if (new File(path).isDirectory()){
 					System.out.println("選択したのはディレクトリなので終了します");
 				}else{
@@ -171,7 +173,7 @@ public class KisoKadai3 {
 		        System.out.println(i+"[?]" + filelist[i].getName());
 		      }
 		    }
-		    System.out.println("移動したいファイルまたはフォルダの番号をえらんでください");
+		    System.out.println("ファイルまたはフォルダの番号をえらんでください");
 		    	int select=0;
 		    	try{
 		    		select=new java.util.Scanner(System.in).nextInt();
@@ -198,12 +200,12 @@ public class KisoKadai3 {
 		boolean flag=true;
 
 		while(flag==true){
-			System.out.println(s+"を選択しています\n続けて選択しますか？(y/n) bで親ディレクトリへ");
+			System.out.println(s+"でよろしいですか？(y/n) bで親ディレクトリへ");
 			switch(getstr()){
-			case "y":
+			case "n":
 				s=cddir(s);
 				break;
-			case "n":
+			case "y":
 				flag=false;
 				break;
 			case "b":
