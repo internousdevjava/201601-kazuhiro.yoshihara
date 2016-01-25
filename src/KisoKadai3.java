@@ -151,14 +151,35 @@ public class KisoKadai3 {
 	//ファイル上書き
 	public static void filew(String s){
 		try{
-			System.out.println("文字を入力します");
-			FileWriter fw =new FileWriter(s);
-			fw.write(getstr());
-	        fw.close();
-	        } catch(Exception e){
-	        	System.out.println("例外が発生したので終了します");
-	        	}
-		}
+			File file = new File(s);
+			if (checkBeforeWritefile(file)){
+
+				BufferedWriter fw = new BufferedWriter(new FileWriter(file));
+				BufferedWriter bw = new BufferedWriter(new FileWriter(file,true));
+
+				System.out.println("文字を入力してください 何も入力せずEnterを押すと終了します");
+
+				String sen;
+
+				sen=getstr();
+				fw.write(sen);
+
+				while(sen.length()!=0){
+				bw.newLine();
+				sen=getstr();
+				bw.write(sen);
+				}
+
+				fw.close();
+				bw.close();
+				}else{
+					System.out.println("ファイルに書き込めません");
+					}
+			}catch(IOException e){
+				System.out.println(e);
+				}
+	}
+
 
 	//ファイル・フォルダのリストを表示して移動
 	@SuppressWarnings("resource")
@@ -320,17 +341,17 @@ public class KisoKadai3 {
 
 				BufferedWriter bw = new BufferedWriter(new FileWriter(file,true));
 
-				System.out.println("改行してから追記しますか?");
-				if(yorn()){
-					bw.newLine();
-				}
+				System.out.println("改行してから追記します");
+				System.out.println("文字を入力してください 何も入力せずEnterを押すと終了します");
 
+				String sen;
+				do{
+				bw.newLine();
+				sen=getstr();
+				bw.write(sen);
+				}while(sen.length()!=0);
 
-				System.out.println("文字を入力してください");
-
-				bw.write(getstr());
 				bw.close();
-
 				}else{
 					System.out.println("ファイルに書き込めません");
 					}
