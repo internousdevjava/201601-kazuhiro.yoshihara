@@ -169,7 +169,6 @@ public class KisoKadai3 {
 				sen=getstr();
 				bw.write(sen);
 				}
-
 				fw.close();
 				bw.close();
 				}else{
