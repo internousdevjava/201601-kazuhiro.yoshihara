@@ -13,9 +13,18 @@ public class KisoKadai3 {
 	public static void main(String[] args){
 		boolean flag=true;
 
-		String path0="c:\\";//スタートするフォルダ 存在しない場合
-		String path=path0;
 
+		String path="c:\\temp";//
+
+		if(new File(path).exists()==false ){
+			System.out.println("Cドライブにtempディレクトリを作成します。");
+			File newfile = new File(path);
+			if (newfile.mkdirs()){
+			System.out.println("ディレクトリの作成に成功しました");
+			}else{
+			System.out.println("ディレクトリの作成に失敗しました");
+			}
+		}
 
 		while(flag){
 			//メニュー
@@ -28,7 +37,7 @@ public class KisoKadai3 {
 			switch(select){
 
 			case "1"://ファイルの作成
-				System.out.println("txtファイルを作成するディレクトリを選択します");
+				System.out.println("txtファイルを作成するディレクトリを選択してください");
 
 				path=selectf(path);
 
@@ -42,7 +51,7 @@ public class KisoKadai3 {
 				break;
 
 			case "2"://ファイルの上書き
-				System.out.println("文字を上書きするファイルを選択します");
+				System.out.println("文字を上書きするファイルを選択してください");
 				path=selectf(path);
 				if (new File(path).isFile()){
 				filew(path);
@@ -53,7 +62,7 @@ public class KisoKadai3 {
 				}
 				break;
 			case "3":
-				System.out.println("文字を追記するファイルを選択します");
+				System.out.println("文字を追記するファイルを選択してください");
 				path=selectf(path);
 				if (new File(path).isFile()){
 				filea(path);
