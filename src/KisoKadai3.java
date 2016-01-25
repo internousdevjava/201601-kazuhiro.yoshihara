@@ -44,7 +44,7 @@ public class KisoKadai3 {
 				if (new File(path).isFile()){
 					System.out.println("選択したのはファイルなので終了します");
 				}else if(new File(path).isDirectory()){
-				mkfile(path);
+				path=mkfile(path);
 				}else{
 					System.out.println("ファイルでもディレクトリでもありません");
 				}
@@ -252,7 +252,7 @@ public class KisoKadai3 {
 
 
 	//ファイルの作成
-	 public static void mkfile(String s){
+	 public static String mkfile(String s){
 
 		 System.out.println("作成するファイルの名前を書いてください(.txt)は要りません");
 		 File newfile = new File(s+"\\"+getstr()+".txt");
@@ -269,6 +269,7 @@ public class KisoKadai3 {
 			 }catch(IOException e){
 				 System.out.println(e);
 				 }
+		 return newfile.getAbsolutePath();
 	 }
 	//ディレクトリの作成
 	public static void mkdirs(String s){
