@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -273,6 +274,7 @@ public class KisoKadai3 {
 	 }
 	//ディレクトリの作成
 	public static void mkdirs(String s){
+		System.out.println("作成するディレクトリの名前を入力してください");
 		File newfile = new File(s+"\\"+getstr());
 		if (newfile.mkdirs()){
 		System.out.println("ディレクトリの作成に成功しました");
@@ -315,10 +317,20 @@ public class KisoKadai3 {
 		try{
 			File file = new File(s);
 			if (checkBeforeWritefile(file)){
+
+				BufferedWriter bw = new BufferedWriter(new FileWriter(file,true));
+
+				System.out.println("改行してから追記しますか?");
+				if(yorn()){
+					bw.newLine();
+				}
+
+
 				System.out.println("文字を入力してください");
-				FileWriter filewriter = new FileWriter(file, true);
-				filewriter.write(getstr());
-				filewriter.close();
+
+				bw.write(getstr());
+				bw.close();
+
 				}else{
 					System.out.println("ファイルに書き込めません");
 					}
