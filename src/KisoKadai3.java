@@ -16,6 +16,7 @@ public class KisoKadai3 {
 		String path0="c:\\";//スタートするフォルダ 存在しない場合
 		String path=path0;
 
+
 		while(flag){
 			//メニュー
 			System.out.println
