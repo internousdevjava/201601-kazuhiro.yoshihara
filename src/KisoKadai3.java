@@ -302,9 +302,9 @@ public class KisoKadai3 {
 		try{
 			File file = new File(s);
 			if (checkBeforeWritefile(file)){
+				System.out.println("文字を入力してください");
 				FileWriter filewriter = new FileWriter(file, true);
-				filewriter.write("はい。元気です¥r¥n");
-				filewriter.write("ではまた¥r¥n");
+				filewriter.write(getstr());
 				filewriter.close();
 				}else{
 					System.out.println("ファイルに書き込めません");

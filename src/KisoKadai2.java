@@ -54,7 +54,11 @@ public class KisoKadai2{
 		int i=0;
 		String s= StrAns();
 
-		i=Integer.parseInt(s);
+		try {
+			i=Integer.parseInt(s);
+			} catch(NumberFormatException e){
+				System.out.println("数字を入力してください\n"+e);
+			}
 		return i;
 	}
 }
